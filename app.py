@@ -8,7 +8,7 @@ import urllib.parse
 # --- 1. APP CONFIGURATION ---
 st.set_page_config(
     page_title="Digital Treasurer",
-    page_icon="static/favicon.png", # You can replace this if you have a file, otherwise it defaults
+    page_icon="static/favicon.png", 
     layout="centered",
     initial_sidebar_state="collapsed"
 )
@@ -21,29 +21,29 @@ st.markdown("""
 
     /* GLOBAL RESET */
     .stApp {
-        background-color: #F8FAFC; /* Slate-50: Very subtle grey-blue */
+        background-color: #F8FAFC; 
         font-family: 'Inter', sans-serif;
     }
 
     /* TYPOGRAPHY */
     h1, h2, h3, h4, .app-title {
-        color: #0F172A; /* Slate-900 */
+        color: #0F172A; 
         font-family: 'Inter', sans-serif;
         font-weight: 800;
         letter-spacing: -0.02em;
     }
     p, label, .stMarkdown, .caption {
-        color: #64748B; /* Slate-500 */
+        color: #64748B; 
         font-size: 14px;
     }
 
     /* BUTTONS - GRADIENT & SHADOW */
     div.stButton > button {
-        background: linear-gradient(180deg, #3B82F6 0%, #2563EB 100%); /* Corporate Blue */
+        background: linear-gradient(180deg, #3B82F6 0%, #2563EB 100%); 
         color: white;
         border: 1px solid #2563EB;
         padding: 12px 24px;
-        border-radius: 8px; /* Slightly tighter radius for pro look */
+        border-radius: 8px; 
         font-weight: 600;
         font-size: 15px;
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -61,7 +61,7 @@ st.markdown("""
     div.stNumberInput > div > div > input,
     div.stSelectbox > div > div > div {
         border-radius: 8px;
-        border: 1px solid #E2E8F0; /* Slate-200 */
+        border: 1px solid #E2E8F0; 
         padding: 10px 15px;
         font-size: 15px;
         color: #1E293B;
@@ -91,7 +91,7 @@ st.markdown("""
         border: 1px solid #E2E8F0;
         padding: 24px;
         border-radius: 12px;
-        text-align: left; /* Aligned left looks more pro */
+        text-align: left; 
         margin-bottom: 24px;
         border-left: 4px solid #3B82F6;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
@@ -148,9 +148,6 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # --- 3. MODERN ICONS (SVG PATHS) ---
-# These are "Heroicons" style - clean, outline, stroke-based.
-
-# A modern abstract logo (Hexagon + Check) implies security & accuracy
 ICON_LOGO_SVG = """
 <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -393,7 +390,8 @@ def main():
                         st.text_area("Copy Text:", txt, height=300)
 
             with tab4:
-                st.dataframe(view_contributions(selected_group), use_container_width=True)
+                # UPDATED: Replaced use_container_width=True with width="stretch"
+                st.dataframe(view_contributions(selected_group), width="stretch")
                 csv = view_contributions(selected_group).to_csv(index=False).encode('utf-8')
                 st.download_button("DOWNLOAD CSV", csv, "data.csv", "text/csv")
 
@@ -454,7 +452,8 @@ def main():
             # Recent List
             st.write("")
             st.markdown("<div style='text-align:center; font-size:12px; color:#94A3B8; margin-top:24px; text-transform:uppercase; letter-spacing:1px;'>Recent Transactions</div>", unsafe_allow_html=True)
-            st.dataframe(df[['member_name', 'amount']].tail(5).iloc[::-1], hide_index=True, use_container_width=True)
+            # UPDATED: Replaced use_container_width=True with width="stretch"
+            st.dataframe(df[['member_name', 'amount']].tail(5).iloc[::-1], hide_index=True, width="stretch")
         else:
             st.info("No records found for this group.")
 
